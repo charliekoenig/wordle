@@ -1,0 +1,131 @@
+body {
+    margin: 0px;
+    background-color: black;
+    color:white;
+    font-family: "Clear Sans", "Helvetica Neue", Arial, sans-serif;;
+}
+
+#header {
+    display: flex;
+    justify-content: center;
+    width: 99vw;
+    margin: 0 auto;
+}
+
+#menuLeft, #menuRight {
+    display: flex;
+    flex: 1;
+}
+
+#menuLeft {
+    justify-content: flex-start;
+}
+
+#menuRight {
+    justify-content: flex-end;
+}
+
+button {
+    font-size: 30px;
+    background-color: transparent;
+    color:#f8f8f8;
+    margin: 10px;
+    border:none;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+#gameContainer {
+    margin: 25px auto 0px auto;
+    width: 300px;
+    height: 350px;
+    display: grid;
+    row-gap: 4px;
+    column-gap: 4px;
+    grid-template-columns:repeat(5, 1fr);
+}
+
+.letterBox {
+    height: 50px;
+    width: 50px;
+    font-size: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border: 1.5px solid #3a3a3c;
+    background-color: transparent;
+    border-radius: 1px;
+
+    font-family: sans-serif;
+    font-weight: bold;
+    color: white;
+    text-transform: capitalize;
+}
+
+#keyboardContainer {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    
+}
+
+#keyboardRow {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 2px 0px 4px 0px;
+}
+
+.letter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: sans-serif;
+    font-weight: bold;
+
+    border: 1px solid #818384;
+    border-radius: 4px;
+    margin: 0px 2px;
+    height: 60px;
+    width: 40px;
+    box-sizing: border-box;
+
+    background-color: #818384;
+    color:#f8f8f8;
+
+
+}
+
+.delete,.enter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: sans-serif;
+    font-weight: bold;
+
+    border: 1px solid #818384;
+    border-radius: 4px;
+    margin: 0px 2px;
+    height: 60px;
+    width: 62px;
+    box-sizing: border-box;
+
+    background-color: #818384;
+    color:#f8f8f8;
+}
+
+.enter {
+    font-size: 12px;
+}
+
+.delete {
+    font-size: 20px;
+}
+
+.delete:hover,.enter:hover,.letter:hover {
+    cursor: pointer;
+    scale:1.02;
+}
