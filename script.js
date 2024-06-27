@@ -3,6 +3,8 @@ window.onload = async () => {
     game = new GameState(word);
 };
 
+
+
 function GameState(word) {
     this.theWord = word;
 
@@ -106,9 +108,8 @@ function onInput(input) {
         if (true) {
             game_won = this.checkGuess(this.guess);
             if (game_won) {
-                // win();
+                won(this);
                 return;
-                // alert("you win");
             } else {
                 this.guess = [];
                 if (this.index <= 25) {
@@ -124,6 +125,26 @@ function onInput(input) {
         
     }
 }
+
+function won(gameState) {
+    result_box = document.getElementById("endGame");
+    result_box.style.display = "flex";
+
+    lose_box = document.getElementById("lose");
+    lose_box.style.display = "none";
+
+    summaryBoxes = Array.from(document.getElementsByClassName("summaryBox"));
+
+    for (let i = 0; i <= gameState.index; i++) {
+
+        setTimeout( ()=> {
+            let color = gameState.inputBoxes[i].style.backgroundColor;
+            summaryBoxes[i].style.backgroundColor = color;
+            summaryBoxes[i].style.visibility = "visible";
+        }, 50 * (i + 1));
+    }
+}
+
 
 function isLetter(input) {
     ascii = input.charCodeAt(0);

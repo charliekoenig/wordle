@@ -2,7 +2,7 @@ body {
     margin: 0px;
     background-color: black;
     color:white;
-    font-family: "Clear Sans", "Helvetica Neue", Arial, sans-serif;;
+    font-family: "Clear Sans", "Helvetica Neue", Arial, sans-serif;
 }
 
 #header {
@@ -128,6 +128,86 @@ button:hover {
     cursor: pointer;
     scale:1.02;
 }
+
+#endGame {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    z-index: 1000;
+
+    background-color: rgba(58, 58, 60, .98);
+    border: 2px solid rgb(236, 234, 226);
+    border-radius: 15px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    height: 70vh;
+    width:40vw;
+    min-width: 400px;
+
+    display: none;
+}
+
+#win,#lose {
+    display: flex;
+    justify-content:center;
+
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+
+.winBox {
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    height: 6vh;
+    width: 6vh;
+    margin: 30px 2px;
+
+    border: 1px solid rgb(236, 234, 226);
+    border-radius: 2px;
+    background-color: #538d4e;
+}
+
+.loseBox {
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    height: 6vh;
+    width: 6vh;
+    margin: 30px 2px;
+
+    border: 1px solid rgb(236, 234, 226);
+    border-radius: 2px;
+    background-color: #3a3a3c;
+}
+
+#summaryBoardContainer {
+    /* width: 8vw; */
+    width: 115px; 
+    aspect-ratio: 5 / 6;
+
+    display:grid;
+    grid-template-columns:repeat(5, 1fr);
+}
+
+.summaryBox {
+    width: 20px;
+    height: 20px;
+    border: 1px rgb(236, 234, 226) solid;
+    border-radius: 2px;
+    margin: auto auto;
+    background-color: black;
+    visibility:hidden;
+}
+
 
 @media (max-width: 600px) {
     .letter {
