@@ -131,13 +131,22 @@ button:hover {
 
 @media (max-width: 600px) {
     .letter {
-        height: 50px;
-        width: 33.33px;
+        height: 40px;
+        width: 26.67px;
+        font-size: 14px;
     }
 
     .delete,.enter {
-        height: 50px;
-        width: 51px;
+        height: 40px;
+        width: 41px;
 
+    }
+
+    .delete {
+        font-size: 16px;
+    }
+
+    .enter {
+        font-size: 10px;
     }
 }
