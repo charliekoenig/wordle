@@ -69,7 +69,6 @@ button:hover {
     display: flex;
     justify-content: center;
     flex-direction: column;
-    
 }
 
 #keyboardRow {
@@ -128,4 +127,17 @@ button:hover {
 .delete:hover,.enter:hover,.letter:hover {
     cursor: pointer;
     scale:1.02;
+}
+
+@media (max-width: 600px) {
+    .letter {
+        height: 50px;
+        width: 33.33px;
+    }
+
+    .delete,.enter {
+        height: 50px;
+        width: 51px;
+
+    }
 }
