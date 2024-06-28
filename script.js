@@ -1,6 +1,7 @@
 window.onload = async () => {
     let word = await getWord();
     game = new GameState(word);
+
 };
 
 
@@ -15,6 +16,7 @@ function GameState(word) {
 
     this.index = 0;
     this.guess = [];
+    this.gameOver = false;
 
     this.incrementIndex = () => { 
         if (this.index < this.length) {
@@ -44,7 +46,7 @@ async function getWord() {
     let response = await fetch("https://random-word-api.vercel.app/api?words=1&length=5");
     let randomWord = await response.json();
 
-    return randomWord[0].split('');
+    return randomWord[0];
 }
 
 
@@ -85,7 +87,7 @@ function syncOnScreenKeyboard(gameState) {
     return keyboardHash;
 }
 
-function onInput(input) {
+function onInput(input) { 
     if (isLetter(input) && (this.guess.length < 4)) {
         this.inputBoxes[this.index].style.borderColor = "#3a3a3c";
         this.inputBoxes[this.index].innerHTML = input;
@@ -115,8 +117,7 @@ function onInput(input) {
                 if (this.index <= 25) {
                     this.incrementIndex();
                 } else {
-                    alert("game over");
-                    // lose();
+                    lost(this);
                 }
             }
         // } else {
@@ -141,10 +142,32 @@ function won(gameState) {
             let color = gameState.inputBoxes[i].style.backgroundColor;
             summaryBoxes[i].style.backgroundColor = color;
             summaryBoxes[i].style.visibility = "visible";
-        }, 50 * (i + 1));
+        }, 90 * (i + 1));
     }
+
+    gameState.gameOver = true;
 }
 
+function lost(gameState) {
+    result_box = document.getElementById("endGame");
+    result_box.style.display = "flex";
+
+    win_box = document.getElementById("win");
+    win_box.style.display = "none";
+
+    summaryBoxes = Array.from(document.getElementsByClassName("summaryBox"));
+
+    for (let i = 0; i < gameState.length; i++) {
+
+        setTimeout( ()=> {
+            let color = gameState.inputBoxes[i].style.backgroundColor;
+            summaryBoxes[i].style.backgroundColor = color;
+            summaryBoxes[i].style.visibility = "visible";
+        }, 90 * (i + 1));
+    }
+
+    gameState.gameOver = true;
+}
 
 function isLetter(input) {
     ascii = input.charCodeAt(0);
@@ -154,21 +177,38 @@ function isLetter(input) {
 }
 
 function compareStrings(guess) {
-    answer = this.theWord;
+    let answer = this.theWord.split('');
     compArray = [0, 0, 0, 0, 0];
     win = true
 
-    for (let i = 0; i < 5; i++) {        
+    for (let i = 0; i < compArray.length; i++) {        
         if (guess[i] == answer[i]) {
             compArray[i] = "correct";
-        } else if (answer.includes(guess[i])) {
+            answer[i] = '';
+        } 
+    }
+
+    console.log(compArray + ' ' + answer + ' ');
+
+    for (let i = 0; i < compArray.length; i++) {
+        if (compArray[i] == 0 && answer.includes(guess[i])) {
+            let index = answer.indexOf(guess[i]);
             compArray[i] = "contains";
+            answer[index] = '';
             win = false;
-        } else {
+        }
+    }
+
+    console.log(compArray + ' ' + answer + ' ');
+
+    for (let i = 0; i < compArray.length; i++) {        
+        if (compArray[i] == 0) {
             compArray[i] = "incorrect";
             win = false;
         }
     }
+
+    console.log(compArray + ' ' + answer + ' ');
 
     compArray.forEach((value, guessIndex) => {
         let index = this.index - (4 - guessIndex);
@@ -195,14 +235,21 @@ function compareStrings(guess) {
     });
 
     return win;
-
 }
 
 function updateKeyboard(newColor, letter) {
     let colors = ["#538d4e", "#b59f3b", "#3a3a3c"];
 
     let key = this.keyHash[letter];
-    let currColor = key.style.backgroundColor;
+    let currColorRGB = key.style.backgroundColor;
+
+    if (currColorRGB) {
+        let currColorParser = currColorRGB.match(/[0-9]+/g);
+        let r = parseInt(currColorParser[0]).toString(16).padStart(2, '0');
+        let g = parseInt(currColorParser[1]).toString(16).padStart(2, '0');
+        let b = parseInt(currColorParser[2]).toString(16).padStart(2, '0');
+        var currColor = `#${r}${g}${b}`;
+    }
 
     if (!currColor || (colors.indexOf(newColor) < colors.indexOf(currColor))) {
         key.style.backgroundColor = newColor;

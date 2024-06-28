@@ -137,7 +137,7 @@ button:hover {
     z-index: 1000;
 
     background-color: rgba(58, 58, 60, .98);
-    border: 2px solid rgb(236, 234, 226);
+    border: 2px solid white;
     border-radius: 15px;
 
     display: flex;
@@ -161,6 +161,8 @@ button:hover {
 
 .winBox {
     display: flex;
+    font-size: 18px;
+    font-weight: bold; 
 
     justify-content: center;
     align-items: center;
@@ -169,13 +171,15 @@ button:hover {
     width: 6vh;
     margin: 30px 2px;
 
-    border: 1px solid rgb(236, 234, 226);
+    border: 1px solid white;
     border-radius: 2px;
     background-color: #538d4e;
 }
 
 .loseBox {
     display: flex;
+    font-size: 18px;
+    font-weight: bold; 
 
     justify-content: center;
     align-items: center;
@@ -184,7 +188,7 @@ button:hover {
     width: 6vh;
     margin: 30px 2px;
 
-    border: 1px solid rgb(236, 234, 226);
+    border: 1px solid white;
     border-radius: 2px;
     background-color: #3a3a3c;
 }
@@ -201,7 +205,7 @@ button:hover {
 .summaryBox {
     width: 20px;
     height: 20px;
-    border: 1px rgb(236, 234, 226) solid;
+    border: 1px white solid;
     border-radius: 2px;
     margin: auto auto;
     background-color: black;
