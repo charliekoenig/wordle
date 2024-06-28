@@ -145,6 +145,7 @@ function won(gameState) {
         }, 90 * (i + 1));
     }
 
+    console.log(gameState.theWord)
     gameState.gameOver = true;
 }
 
@@ -166,20 +167,22 @@ function lost(gameState) {
         }, 90 * (i + 1));
     }
 
+    console.log(gameState.theWord)
     gameState.gameOver = true;
 }
 
 function isLetter(input) {
-    ascii = input.charCodeAt(0);
-    len = (input.length == 1);
+    let ascii = input.charCodeAt(0);
+    let len = (input.length == 1);
 
     return ((ascii >= 65 && ascii <= 90) || (ascii >= 97 && ascii <= 122)) && (len)
 }
 
 function compareStrings(guess) {
     let answer = this.theWord.split('');
-    compArray = [0, 0, 0, 0, 0];
-    win = true
+    let compArray = [0, 0, 0, 0, 0];
+    let win = true
+
 
     for (let i = 0; i < compArray.length; i++) {        
         if (guess[i] == answer[i]) {
@@ -188,27 +191,19 @@ function compareStrings(guess) {
         } 
     }
 
-    console.log(compArray + ' ' + answer + ' ');
-
     for (let i = 0; i < compArray.length; i++) {
         if (compArray[i] == 0 && answer.includes(guess[i])) {
             let index = answer.indexOf(guess[i]);
             compArray[i] = "contains";
             answer[index] = '';
-            win = false;
         }
     }
-
-    console.log(compArray + ' ' + answer + ' ');
 
     for (let i = 0; i < compArray.length; i++) {        
         if (compArray[i] == 0) {
             compArray[i] = "incorrect";
-            win = false;
         }
     }
-
-    console.log(compArray + ' ' + answer + ' ');
 
     compArray.forEach((value, guessIndex) => {
         let index = this.index - (4 - guessIndex);
@@ -226,10 +221,12 @@ function compareStrings(guess) {
             inputBoxes[index].style.backgroundColor = yellow;
             inputBoxes[index].style.borderColor = yellow;
             this.colorKeyboard(yellow, letter)
+            win = false;
         } else if (value == "incorrect") {
             inputBoxes[index].style.backgroundColor = grey;
             inputBoxes[index].style.borderColor = grey;
             this.colorKeyboard(grey, letter)
+            win = false;
         }
 
     });

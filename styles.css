@@ -194,7 +194,6 @@ button:hover {
 }
 
 #summaryBoardContainer {
-    /* width: 8vw; */
     width: 115px; 
     aspect-ratio: 5 / 6;
 
@@ -210,6 +209,84 @@ button:hover {
     margin: auto auto;
     background-color: black;
     visibility:hidden;
+}
+
+#statsContainer {
+    width: 80%;
+    height: 25%;
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+}
+
+.sectionTitle {
+    text-align: center;
+    font-size: 20px;
+    margin-bottom: 30px;
+}
+
+.statBox {
+    display: flex;
+
+    align-items: center;
+    flex-direction: column;
+
+    margin: auto;
+    height: 90%;
+    width: 48%;
+}
+
+.stat {
+    font-size: 40px;
+    font-family: "Clear Sans", "Helvetica Neue", Arial, sans-serif;
+}
+
+.subStat {
+    font-size: 12px;
+    margin: 5px;
+}
+
+
+#menuButtons {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    flex-direction: row;
+
+    margin: auto;
+    height: 10%;
+    width: 98%;
+}
+
+.menuOption {
+    font-family: "Clear Sans", "Helvetica Neue", Arial, sans-serif;
+    font-weight:400;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin: 0px 20px;
+
+    width: 25%;
+    height:96%;
+    border: 1.5px white solid;
+    border-radius: 15px;
+}
+
+.menuOption:hover {
+    scale: 1.05;
+    cursor: pointer;
+}
+
+
+@media (max-width: 1050px) {
+
+    .statBox {
+        width: 40%;
+    }
 }
 
 
