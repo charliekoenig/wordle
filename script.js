@@ -1,5 +1,6 @@
 window.onload = async () => {
     let word = await getWord();
+    setMenuButtons();
     game = new GameState(word);
 
 };
@@ -106,10 +107,10 @@ function onInput(input) {
         this.guess.pop();
     } else if ((input == "Enter") && (this.guess.length == 5)) {
         guessString = this.guess.join('');
+        this.inputBoxes[this.index].style.borderColor = "#3a3a3c";
         // if (isWord(guessString)) { 
         if (true) {
-            game_won = this.checkGuess(this.guess);
-            if (game_won) {
+            if (this.checkGuess(this.guess)) {
                 won(this);
                 return;
             } else {
@@ -196,12 +197,14 @@ function compareStrings(guess) {
             let index = answer.indexOf(guess[i]);
             compArray[i] = "contains";
             answer[index] = '';
+            win = false;
         }
     }
 
     for (let i = 0; i < compArray.length; i++) {        
         if (compArray[i] == 0) {
             compArray[i] = "incorrect";
+            win = false;
         }
     }
 
@@ -213,22 +216,21 @@ function compareStrings(guess) {
         
         let letter = (inputBoxes[index].innerHTML).toUpperCase();
 
-        if (value == "correct") {
-            inputBoxes[index].style.backgroundColor = green;
-            inputBoxes[index].style.borderColor = green;
-            this.colorKeyboard(green, letter)
-        } else if (value == "contains") {
-            inputBoxes[index].style.backgroundColor = yellow;
-            inputBoxes[index].style.borderColor = yellow;
-            this.colorKeyboard(yellow, letter)
-            win = false;
-        } else if (value == "incorrect") {
-            inputBoxes[index].style.backgroundColor = grey;
-            inputBoxes[index].style.borderColor = grey;
-            this.colorKeyboard(grey, letter)
-            win = false;
-        }
-
+        setTimeout( ()=> {
+            if (value == "correct") {
+                inputBoxes[index].style.backgroundColor = green;
+                inputBoxes[index].style.borderColor = green;
+                this.colorKeyboard(green, letter)
+            } else if (value == "contains") {
+                inputBoxes[index].style.backgroundColor = yellow;
+                inputBoxes[index].style.borderColor = yellow;
+                this.colorKeyboard(yellow, letter)
+            } else if (value == "incorrect") {
+                inputBoxes[index].style.backgroundColor = grey;
+                inputBoxes[index].style.borderColor = grey;
+                this.colorKeyboard(grey, letter)
+            }
+        }, 90 * ((index % 5)));
     });
 
     return win;
@@ -252,4 +254,14 @@ function updateKeyboard(newColor, letter) {
         key.style.backgroundColor = newColor;
         key.style.borderColor = newColor;
     }
+}
+
+function setMenuButtons() {
+    menu = document.getElementsByClassName("menuOption");
+    playAgain = menu[0];
+    seeBoard  = menu[1];
+
+    playAgain.addEventListener('click', () => {
+        window.location.reload();
+    });
 }
