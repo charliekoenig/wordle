@@ -2,7 +2,6 @@ window.onload = async () => {
     let word = await getWord();
     setMenuButtons();
     game = new GameState(word);
-
 };
 
 
@@ -18,6 +17,7 @@ function GameState(word) {
     this.index = 0;
     this.guess = [];
     this.gameOver = false;
+    this.totalGuesses = 0;
 
     this.incrementIndex = () => { 
         if (this.index < this.length) {
@@ -41,6 +41,23 @@ function GameState(word) {
     this.handleInput = onInput;
     this.checkGuess = compareStrings;
     this.colorKeyboard = updateKeyboard;
+    
+    this.incrementCookie = (cookieName) => {
+        let cookieArray = document.cookie.split('; ');
+        let value = 0;
+        cookieArray.forEach( (cookie) => {
+            if (cookie.includes(cookieName)) {
+                value = parseInt(cookie);
+                value == NaN? value = 1 : value += 1;
+            }
+        });
+
+        let date = new Date();
+        let days = 365;
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+        let expires = "expires=" + date.toUTCString();
+        document.cookie = cookieName + "=" + value + ";" + expires + ";path=/";
+    }
 }
 
 async function getWord() {
@@ -108,6 +125,7 @@ function onInput(input) {
     } else if ((input == "Enter") && (this.guess.length == 5)) {
         guessString = this.guess.join('');
         this.inputBoxes[this.index].style.borderColor = "#3a3a3c";
+        this.totalGuesses += 1;
         // if (isWord(guessString)) { 
         if (true) {
             if (this.checkGuess(this.guess)) {
@@ -233,6 +251,7 @@ function compareStrings(guess) {
         }, 90 * ((index % 5)));
     });
 
+    console.log("Total Guesses: " + this.totalGuesses);
     return win;
 }
 
@@ -261,7 +280,32 @@ function setMenuButtons() {
     playAgain = menu[0];
     seeBoard  = menu[1];
 
+    resultBox = document.getElementById("endGame");
+    smallMenuContainer = document.getElementById("smallMenu");
+    keyboard = document.getElementById("keyboardContainer");
+
     playAgain.addEventListener('click', () => {
         window.location.reload();
+    });
+
+    seeBoard.addEventListener('click', () => {
+        resultBox.style.display = "none";
+        smallMenuContainer.style.display = "flex";
+        keyboard.style.display = "none";
+    });
+
+    smallMenuButton = document.getElementsByClassName("smallMenuOption");
+    playAgain = smallMenuButton[0];
+    viewStats  = smallMenuButton[1];
+
+    playAgain.addEventListener('click', () => {
+        window.location.reload();
+    });
+
+    viewStats.addEventListener('click', () => {
+        resultBox.style.display = "flex";
+        smallMenuContainer.style.display = "none";
+        keyboard.style.display = "flex";
+
     });
 }
