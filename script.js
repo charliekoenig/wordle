@@ -1,10 +1,11 @@
 window.onload = async () => {
     let word = await getWord();
+    while (word.includes('-')) {
+        word = await getWord();
+    }
     setMenuButtons();
     game = new GameState(word);
 };
-
-
 
 function GameState(word) {
     this.theWord = word;
@@ -31,7 +32,6 @@ function GameState(word) {
             this.reFocus(this.index - 1);
             this.index -= 1; 
         }
-
     } 
 
     this.reFocus = (newIndex) => { 
@@ -186,7 +186,11 @@ function lost(gameState) {
         }, 90 * (i + 1));
     }
 
-    console.log(gameState.theWord)
+    document.getElementById("correctWord").style.display = "flex";
+    document.getElementById("title").style.visibility = "hidden";
+    document.getElementById("correctWord").innerText = gameState.theWord.toUpperCase();
+
+
     gameState.gameOver = true;
 }
 

@@ -12,6 +12,26 @@ body {
     margin: 0 auto;
 }
 
+#title {
+    font-size: 37.5px; 
+    padding:none; 
+    margin:none; 
+}
+
+#correctWord {
+    display: none;
+    justify-content: center;
+    align-items: center;
+
+    position: fixed;
+
+    font-size: 30px; 
+    color: black;
+    background-color: white;
+    border-radius: 15px;
+    padding:10px; 
+}
+
 #menuLeft, #menuRight {
     display: flex;
     flex: 1;
