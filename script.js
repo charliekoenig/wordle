@@ -161,7 +161,7 @@ function won(gameState) {
             let color = gameState.inputBoxes[i].style.backgroundColor;
             summaryBoxes[i].style.backgroundColor = color;
             summaryBoxes[i].style.visibility = "visible";
-        }, 90 * (i + 1));
+        }, 200 * (1.09 ** i));
     }
 
     console.log(gameState.theWord)
@@ -183,7 +183,7 @@ function lost(gameState) {
             let color = gameState.inputBoxes[i].style.backgroundColor;
             summaryBoxes[i].style.backgroundColor = color;
             summaryBoxes[i].style.visibility = "visible";
-        }, 90 * (i + 1));
+        }, 200 * (1.09 ** i));
     }
 
     document.getElementById("correctWord").style.display = "flex";
