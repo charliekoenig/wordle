@@ -9,7 +9,6 @@ body {
     display: flex;
     justify-content: center;
     width: 99vw;
-    margin: 0 auto;
 }
 
 #title {
@@ -62,14 +61,16 @@ button:hover {
     width: 300px;
     height: 350px;
     display: grid;
-    row-gap: 4px;
-    column-gap: 4px;
+    align-items: center;
+    /* row-gap: 4px;
+    column-gap: 4px; */
     grid-template-columns:repeat(5, 1fr);
 }
 
 .letterBox {
     height: 50px;
     width: 50px;
+    margin: auto;
     font-size: 30px;
     display: flex;
     justify-content: center;
@@ -114,8 +115,6 @@ button:hover {
 
     background-color: #818384;
     color:#f8f8f8;
-
-
 }
 
 .delete,.enter {
@@ -346,13 +345,7 @@ button:hover {
 }
 
 
-@media (max-width: 600px) {
-    .letter {
-        height: 40px;
-        width: 26.67px;
-        font-size: 14px;
-    }
-
+@media (max-width: 500px) {
     .delete,.enter {
         height: 40px;
         width: 41px;
@@ -365,6 +358,34 @@ button:hover {
 
     .enter {
         font-size: 10px;
+    }
+
+    #title,#menuLeft,#menuRight {
+        margin: auto;
+    }
+
+    #title {
+        font-size: 35px;
+    }
+
+    .letterBox {
+        width: 12.2vw;
+        height: 12.2vw;
+    }
+
+    #gameContainer {
+        width: 73vw;
+        aspect-ratio: 5/6;
+    }
+
+    .letter {
+        width: 8vw;
+        height:12vw;
+    }
+
+    .enter,.delete {
+        width: 12vw;
+        height:12vw;
     }
 }
 

@@ -3,6 +3,8 @@ window.onload = async () => {
     while (word.includes('-')) {
         word = await getWord();
     }
+
+    console.log(word);
     setMenuButtons();
     game = new GameState(word);
 };
@@ -82,13 +84,13 @@ function initalizeBoard(gameState) {
 
 function syncOnScreenKeyboard(gameState) {
     keys = Array.from(document.getElementsByName("letter"));
-    keyboardHash = []
+    keyboardHash = {}
 
     keys.forEach((key) => {
         keyboardHash[key.innerHTML] = key;
 
         key.addEventListener('click', () => {
-            gameState.handleInput(key.innerHTML)
+            gameState.handleInput(key.innerHTML.toLowerCase())
         });
     });
 
@@ -203,11 +205,13 @@ function isLetter(input) {
 
 function compareStrings(guess) {
     let answer = this.theWord.split('');
+    console.log(answer);  
     let compArray = [0, 0, 0, 0, 0];
     let win = true
 
 
-    for (let i = 0; i < compArray.length; i++) {        
+    for (let i = 0; i < compArray.length; i++) {    
+        console.log(answer[i] + ' ' + guess[i]);  
         if (guess[i] == answer[i]) {
             compArray[i] = "correct";
             answer[i] = '';
