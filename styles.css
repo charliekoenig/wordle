@@ -165,7 +165,7 @@ button:hover {
 
     height: 70vh;
     width:40vw;
-    min-width: 400px;
+    min-width: 365px;
 
     display: none;
 }
@@ -360,13 +360,30 @@ button:hover {
         font-size: 10px;
     }
 
-    #title,#menuLeft,#menuRight {
-        margin: auto;
-    }
-
     #title {
+        margin: auto;
         font-size: 35px;
     }
+
+    #correctWord {
+        display: none;    
+        position: fixed;
+        font-size: 30px; 
+        color: black;
+        background-color: white;
+        border-radius: 15px;
+        margin:0px;
+        top: 10.5px;
+    }
+    
+
+    
+
+    #menuLeft,#menuRight {
+        display: none;
+    }
+
+
 
     .letterBox {
         width: 12.2vw;
@@ -386,6 +403,19 @@ button:hover {
     .enter,.delete {
         width: 12vw;
         height:12vw;
+    }
+
+    .sectionTitle {
+        margin-bottom: 15px;
+        font-size: 18px;
+    }
+    
+    .statBox {
+        font-size: 16px;
+    }
+
+    #statsContainer {
+        margin-top: 15px;
     }
 }
 
