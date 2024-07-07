@@ -50,7 +50,11 @@ function GameState(word) {
         cookieArray.forEach( (cookie) => {
             if (cookie.includes(cookieName)) {
                 value = parseInt(cookie);
+                console.log("Value before increment: " + value);
+
                 value == NaN? value = 1 : value += 1;
+                console.log("Value after increment: " + value);
+
             }
         });
 
