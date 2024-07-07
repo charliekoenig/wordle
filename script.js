@@ -46,7 +46,7 @@ function GameState(word) {
     this.incrementCookie = (cookieName) => {
         let cookieArray = document.cookie.split('; ');
         console.log(cookieArray);
-        let value = 0;
+        value = 1;
         cookieArray.forEach( (cookie) => {
             if (cookie.includes(cookieName)) {
                 value = parseInt(cookie);
