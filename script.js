@@ -325,11 +325,13 @@ function setMenuButtons() {
 
 function getCookie (cookieName) {
     let cookieArray = document.cookie.split('; ');
+    let value = 0;
     cookieArray.forEach((cookie) => {
         let [name, val] = cookie.split('=');
         if (name == cookieName) {
             value = parseInt(val, 10);
             if (!isNaN(value)) {
+                console.log(value);
                 return value;
             }
         } 
@@ -343,9 +345,6 @@ function writeStats() {
 
     winPCT = getCookie("wins") / getCookie("gamesPlayed");
     avgGuesses = getCookie("totalGuess") / getCookie("gamesPlayed");
-
-    console.log("win percentage: " + winPCT);
-    console.log("average guesses: " + avgGuesses);
 
     stats[0].innerText = winPCT + "%";
     stats[1].innerText = avgGuesses;
