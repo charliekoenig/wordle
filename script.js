@@ -47,19 +47,20 @@ function GameState(word) {
         let cookieArray = document.cookie.split('; ');
         console.log(cookieArray);
         value = 1;
-        cookieArray.forEach( (cookie) => {
-            if (cookie.includes(cookieName)) {
-                value = parseInt(cookie);
+        cookieArray.forEach((cookie) => {
+            let [name, val] = cookie.split('=');
+            if (name == cookieName) {
+                value = parseInt(val, 10);
                 console.log("Value before increment: " + value);
-
-                value == NaN? value = 1 : value += 1;
+                if (!isNaN(value)) {
+                    value += 1;
+                }
                 console.log("Value after increment: " + value);
-
             }
         });
 
         console.log(cookieName + ": " + value);
-
+    
         let date = new Date();
         let days = 365;
         date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
