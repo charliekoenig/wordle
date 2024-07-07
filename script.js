@@ -45,17 +45,14 @@ function GameState(word) {
     
     this.incrementCookie = (cookieName) => {
         let cookieArray = document.cookie.split('; ');
-        console.log(cookieArray);
         value = 1;
         cookieArray.forEach((cookie) => {
             let [name, val] = cookie.split('=');
             if (name == cookieName) {
                 value = parseInt(val, 10);
-                console.log("Value before increment: " + value);
                 if (!isNaN(value)) {
                     value += 1;
                 }
-                console.log("Value after increment: " + value);
             }
         });
 
@@ -344,7 +341,7 @@ function writeStats() {
     stats = document.getElementsByClassName("stat");
 
     winPCT = getCookie("wins") / getCookie("gamesPlayed");
-    avgGuesses = getCookie("totalGuess") / getCookie("gamesPlayed");
+    avgGuesses = getCookie("totalGuesses") / getCookie("gamesPlayed");
 
     stats[0].innerText = winPCT + "%";
     stats[1].innerText = avgGuesses;
