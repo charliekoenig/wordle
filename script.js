@@ -345,7 +345,7 @@ function writeStats() {
     guesses = getCookie("totalGuesses");
 
     winPCT = Math.round((wins/games) * 100);
-    avgGuesses = Math.round((guesses/games) * 100);
+    avgGuesses = parseFloat((guesses/games).toFixed(2));
 
     stats[0].innerText = winPCT + "%";
     stats[1].innerText = avgGuesses;
