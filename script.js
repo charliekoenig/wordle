@@ -61,11 +61,6 @@ function GameState(word) {
         date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
         let expires = "expires=" + date.toUTCString();
         document.cookie = `${cookieName}=${value}; ${expires}; path=/`;
-
-        // Test setting a cookie to ensure cookies are working
-        document.cookie = `testCookie=1; ${expires}; path=/`;
-        console.log("Test cookie set:", document.cookie.includes("testCookie=1"));
-
     }
 
     this.incrementCookie("gamesPlayed");
