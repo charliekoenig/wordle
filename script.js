@@ -144,13 +144,14 @@ function onInput(input) {
             won(this);
             return;
         } else {
-            this.guess = [];
             if (this.index <= 25) {
                 this.incrementIndex();
             } else {
                 lost(this);
             }
         }
+
+        this.guess = [];
     }
 }
 
