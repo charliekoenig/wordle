@@ -4,7 +4,6 @@ window.onload = async () => {
         word = await getWord();
     }
 
-    console.log(word);
     setMenuButtons();
     game = new GameState(word);
 };
@@ -46,6 +45,7 @@ function GameState(word) {
     
     this.incrementCookie = (cookieName) => {
         let cookieArray = document.cookie.split('; ');
+        console.log(cookieArray);
         let value = 0;
         cookieArray.forEach( (cookie) => {
             if (cookie.includes(cookieName)) {
@@ -54,12 +54,22 @@ function GameState(word) {
             }
         });
 
+        console.log(cookieName + ": " + value);
+
         let date = new Date();
         let days = 365;
         date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
         let expires = "expires=" + date.toUTCString();
-        document.cookie = cookieName + "=" + value + ";" + expires + ";path=/";
+        document.cookie = `${cookieName}=${value}; ${expires}; path=/`;
+
+        // Test setting a cookie to ensure cookies are working
+        document.cookie = `testCookie=1; ${expires}; path=/`;
+        console.log("Test cookie set:", document.cookie.includes("testCookie=1"));
+
     }
+
+    this.incrementCookie("gamesPlayed");
+
 }
 
 async function getWord() {
@@ -125,28 +135,25 @@ function onInput(input) {
         this.inputBoxes[this.index].innerHTML = '';
         this.guess.pop();
     } else if ((input == "Enter") && (this.guess.length == 5)) {
+        this.incrementCookie("totalGuesses");
         guessString = this.guess.join('');
         this.inputBoxes[this.index].style.borderColor = "#3a3a3c";
         this.totalGuesses += 1;
-        // if (isWord(guessString)) { 
-        if (true) {
-            if (this.checkGuess(this.guess)) {
-                won(this);
-                return;
+        if (this.checkGuess(this.guess)) {
+            this.incrementCookie("wins");
+            won(this);
+            return;
+        } else {
+            this.guess = [];
+            if (this.index <= 25) {
+                this.incrementIndex();
             } else {
-                this.guess = [];
-                if (this.index <= 25) {
-                    this.incrementIndex();
-                } else {
-                    lost(this);
-                }
+                lost(this);
             }
-        // } else {
-        //     alert("Word not found");
         }
-        
     }
 }
+
 
 function won(gameState) {
     result_box = document.getElementById("endGame");
@@ -166,7 +173,6 @@ function won(gameState) {
         }, 200 * (1.09 ** i));
     }
 
-    console.log(gameState.theWord)
     gameState.gameOver = true;
 }
 
@@ -205,13 +211,11 @@ function isLetter(input) {
 
 function compareStrings(guess) {
     let answer = this.theWord.split('');
-    console.log(answer);  
     let compArray = [0, 0, 0, 0, 0];
     let win = true
 
 
     for (let i = 0; i < compArray.length; i++) {    
-        console.log(answer[i] + ' ' + guess[i]);  
         if (guess[i] == answer[i]) {
             compArray[i] = "correct";
             answer[i] = '';
@@ -259,7 +263,6 @@ function compareStrings(guess) {
         }, 90 * ((index % 5)));
     });
 
-    console.log("Total Guesses: " + this.totalGuesses);
     return win;
 }
 
