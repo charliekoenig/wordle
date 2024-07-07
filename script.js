@@ -323,17 +323,17 @@ function setMenuButtons() {
 function getCookie (cookieName) {
     let cookieArray = document.cookie.split('; ');
     let value = 0;
-    cookieArray.forEach((cookie) => {
-        let [name, val] = cookie.split('=');
-        if (name == cookieName) {
+
+    for (let i = 0; i < cookieArray.length; i++) {
+        [currCookie, val] = cookieArray[i].split('=');
+        if (currCookie == cookieName) {
             value = parseInt(val, 10);
             if (!isNaN(value)) {
                 console.log(value);
                 return value;
             }
         } 
-    });
-
+    }
     return 0;
 }
 
