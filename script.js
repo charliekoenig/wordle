@@ -340,8 +340,12 @@ function getCookie (cookieName) {
 function writeStats() {
     stats = document.getElementsByClassName("stat");
 
-    winPCT = getCookie("wins") / getCookie("gamesPlayed");
-    avgGuesses = getCookie("totalGuesses") / getCookie("gamesPlayed");
+    wins = getCookie("wins");
+    games = getCookie("gamesPlayed");
+    guesses = getCookie("totalGuesses");
+
+    winPCT = Math.round((wins/games) * 100);
+    avgGuesses = Math.round((guesses/games) * 100);
 
     stats[0].innerText = winPCT + "%";
     stats[1].innerText = avgGuesses;
