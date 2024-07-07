@@ -141,16 +141,17 @@ function onInput(input) {
         this.totalGuesses += 1;
         if (this.checkGuess(this.guess)) {
             this.incrementCookie("wins");
+            writeStats()
             won(this);
             return;
         } else {
             if (this.index <= 25) {
                 this.incrementIndex();
             } else {
+                writeStats()
                 lost(this);
             }
         }
-
         this.guess = [];
     }
 }
@@ -320,4 +321,32 @@ function setMenuButtons() {
         keyboard.style.display = "flex";
 
     });
+}
+
+function getCookie (cookieName) {
+    let cookieArray = document.cookie.split('; ');
+    cookieArray.forEach((cookie) => {
+        let [name, val] = cookie.split('=');
+        if (name == cookieName) {
+            value = parseInt(val, 10);
+            if (!isNaN(value)) {
+                return value;
+            }
+        } 
+    });
+
+    return 0;
+}
+
+function writeStats() {
+    stats = document.getElementsByClassName("stat");
+
+    winPCT = getCookie("wins") / getCookie("gamesPlayed");
+    avgGuesses = getCookie("totalGuess") / getCookie("gamesPlayed");
+
+    console.log("win percentage: " + winPCT);
+    console.log("average guesses: " + avgGuesses);
+
+    stats[0].innerText = winPCT + "%";
+    stats[1].innerText = avgGuesses;
 }
