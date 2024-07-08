@@ -55,8 +55,6 @@ function GameState(word) {
                 }
             }
         });
-
-        console.log(cookieName + ": " + value);
     
         let date = new Date();
         let days = 365;
@@ -329,7 +327,6 @@ function getCookie (cookieName) {
         if (currCookie == cookieName) {
             value = parseInt(val, 10);
             if (!isNaN(value)) {
-                console.log(value);
                 return value;
             }
         } 

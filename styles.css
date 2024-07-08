@@ -62,8 +62,6 @@ button:hover {
     height: 350px;
     display: grid;
     align-items: center;
-    /* row-gap: 4px;
-    column-gap: 4px; */
     grid-template-columns:repeat(5, 1fr);
 }
 
