@@ -75,12 +75,11 @@ async function getWord() {
 }
 
 
-/* Initialize the gameboard */
 function initalizeBoard(gameState) {
     inputBoxes = Array.from(document.getElementsByName("letterBox"));
     inputBoxes[0].style.borderColor = "rgb(207, 207, 207)";
     
-    window.addEventListener('keydown', (event) => { /* handle input */
+    window.addEventListener('keydown', (event) => {
         gameState.handleInput(event.key);
     });
 
@@ -113,6 +112,10 @@ function syncOnScreenKeyboard(gameState) {
 }
 
 function onInput(input) { 
+    if (isLetter(input)) {
+        input = input.toLowerCase();
+    }
+    
     if (isLetter(input) && (this.guess.length < 4)) {
         this.inputBoxes[this.index].style.borderColor = "#3a3a3c";
         this.inputBoxes[this.index].innerHTML = input;
