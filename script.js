@@ -141,7 +141,6 @@ function onInput(input) {
             this.incrementCookie("wins");
             writeStats()
             won(this);
-            return;
         } else {
             if (this.index <= 25) {
                 this.incrementIndex();
